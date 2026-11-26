@@ -13,7 +13,7 @@
   var shards=[],TL=[],byId={},running=false,lastShard=0,last=0;
 
   // ===== Sprite animasi klik (dari video referensi, latar dihapus): 30 frame @30fps, 6x5, 192px =====
-  var SPR_SRC="img/sprite.webp",SPR=288,SPR_SZ=56,SPR_FPS=48,sprReady=false,spr=new Image(),sil=null;
+  var SPR_SRC="assets/img/fx/sprite.webp",SPR=288,SPR_SZ=56,SPR_FPS=48,sprReady=false,spr=new Image(),sil=null;
   spr.onload=function(){
     try{ // siluet cyan tipis di bawah sprite supaya bagian putih tetap terbaca di latar terang
       sil=document.createElement('canvas');sil.width=spr.width;sil.height=spr.height;var sc=sil.getContext('2d');

@@ -324,24 +324,24 @@
   });
   IV_ITEMS.forEach(function(it){ if (it.fam === 'Enhancement Stone') it.ic = 'enh_' + it.g; });
   var EQ_IMG = {
-    'enh_1':'enh_1.png',
-    'enh_2':'enh_2.png',
-    'enh_3':'enh_3.png',
-    'enh_4':'enh_4.png',
-    'eq_rusty_sword':'eq_rusty_sword.webp',
-    'eq_wooden_bow':'eq_wooden_bow.webp',
-    'eq_apprentice_staff':'eq_apprentice_staff.webp',
-    'eq_iron_sword':'eq_iron_sword.webp',
-    'eq_hunters_bow':'eq_hunters_bow.webp',
-    'eq_adept_staff':'eq_adept_staff.webp',
-    'eq_leather_armor':'eq_leather_armor.webp',
-    'eq_wooden_shield':'eq_wooden_shield.webp',
-    'eq_iron_armor':'eq_iron_armor.webp',
-    'eq_reinforced_shield':'eq_reinforced_shield.webp',
-    'eq_copper_ring':'eq_copper_ring.webp',
-    'eq_simple_pendant':'eq_simple_pendant.webp',
-    'eq_silver_ring':'eq_silver_ring.webp',
-    'eq_mana_pendant':'eq_mana_pendant.webp'
+    'enh_1':'assets/img/items/enh_1.png',
+    'enh_2':'assets/img/items/enh_2.png',
+    'enh_3':'assets/img/items/enh_3.png',
+    'enh_4':'assets/img/items/enh_4.png',
+    'eq_rusty_sword':'assets/img/equipment/eq_rusty_sword.webp',
+    'eq_wooden_bow':'assets/img/equipment/eq_wooden_bow.webp',
+    'eq_apprentice_staff':'assets/img/equipment/eq_apprentice_staff.webp',
+    'eq_iron_sword':'assets/img/equipment/eq_iron_sword.webp',
+    'eq_hunters_bow':'assets/img/equipment/eq_hunters_bow.webp',
+    'eq_adept_staff':'assets/img/equipment/eq_adept_staff.webp',
+    'eq_leather_armor':'assets/img/equipment/eq_leather_armor.webp',
+    'eq_wooden_shield':'assets/img/equipment/eq_wooden_shield.webp',
+    'eq_iron_armor':'assets/img/equipment/eq_iron_armor.webp',
+    'eq_reinforced_shield':'assets/img/equipment/eq_reinforced_shield.webp',
+    'eq_copper_ring':'assets/img/equipment/eq_copper_ring.webp',
+    'eq_simple_pendant':'assets/img/equipment/eq_simple_pendant.webp',
+    'eq_silver_ring':'assets/img/equipment/eq_silver_ring.webp',
+    'eq_mana_pendant':'assets/img/equipment/eq_mana_pendant.webp'
   };
   /* Data equipment (Cyan_Equipment_Data v1.0). Stat belum ditampilkan di Inventory. Material, biaya, dan cara dapat belum dirancang. */
   var EQ_DEF = {"rusty_sword": {"id": "rusty_sword", "name": "Rusty Sword", "grade": 1, "category": "Weapon", "subtype": "Sword", "description": "Pedang tua dengan bilah berkarat dan gagang aus. Meski sederhana, senjata ini masih layak menemani petualang pemula.", "lore": "Konon pedang seperti ini pernah menjadi perlengkapan penjaga desa.", "min_level": 1, "max_level": 10, "base_stats": {"ATK": 5}, "growth_per_level": {"ATK": 1}, "icon": "Grade_1/Rusty_Sword.png"}, "wooden_bow": {"id": "wooden_bow", "name": "Wooden Bow", "grade": 1, "category": "Weapon", "subtype": "Bow", "description": "Busur sederhana dari kayu lentur. Ringan dan mudah digunakan, meski daya hancurnya terbatas.", "lore": "Busur latihan yang sering dibuat untuk pemburu muda.", "min_level": 1, "max_level": 10, "base_stats": {"ATK": 3, "CRT_RATE": 1, "SPD": 1}, "growth_per_level": {"ATK": 1, "CRT_RATE": 0.1, "SPD": 0.2}, "icon": "Grade_1/Wooden_Bow.png"}, "apprentice_staff": {"id": "apprentice_staff", "name": "Apprentice Staff", "grade": 1, "category": "Weapon", "subtype": "Staff", "description": "Tongkat sihir pemula dengan kristal kecil di ujungnya untuk menyalurkan energi sihir.", "lore": "Sering diberikan kepada murid yang baru mempelajari dasar-dasar sihir.", "min_level": 1, "max_level": 10, "base_stats": {"MATK": 5, "MP": 5}, "growth_per_level": {"MATK": 1, "MP": 1}, "icon": "Grade_1/Apprentice_Staff.png"}, "iron_sword": {"id": "iron_sword", "name": "Iron Sword", "grade": 2, "category": "Weapon", "subtype": "Sword", "description": "Pedang besi dengan bilah lebih tebal dan tajam dibanding senjata pemula.", "lore": "Senjata standar bagi petualang yang mulai menghadapi ancaman lebih berat.", "min_level": 1, "max_level": 20, "base_stats": {"ATK": 12}, "growth_per_level": {"ATK": 2}, "icon": "Grade_2/Iron_Sword.png"}, "hunters_bow": {"id": "hunters_bow", "name": "Hunter's Bow", "grade": 2, "category": "Weapon", "subtype": "Bow", "description": "Busur dari kayu pilihan dengan lengkungan stabil, dirancang untuk tembakan kuat dan terarah.", "lore": "Disukai pemburu berpengalaman karena keseimbangan kekuatan dan kelincahannya.", "min_level": 1, "max_level": 20, "base_stats": {"ATK": 8, "CRT_RATE": 2, "SPD": 2}, "growth_per_level": {"ATK": 1, "CRT_RATE": 0.2, "SPD": 0.2}, "icon": "Grade_2/Hunters_Bow.png"}, "adept_staff": {"id": "adept_staff", "name": "Adept Staff", "grade": 2, "category": "Weapon", "subtype": "Staff", "description": "Tongkat sihir dengan kristal lebih besar dan rangka yang diperkuat untuk menyalurkan sihir lebih kuat.", "lore": "Dibuat bagi penyihir yang telah melewati tahap latihan dasar.", "min_level": 1, "max_level": 20, "base_stats": {"MATK": 10, "MP": 15}, "growth_per_level": {"MATK": 1, "MP": 2}, "icon": "Grade_2/Adept_Staff.png"}, "leather_armor": {"id": "leather_armor", "name": "Leather Armor", "grade": 1, "category": "Armor", "subtype": "Body Armor", "description": "Pelindung tubuh dari beberapa lapis kulit yang dijahit kuat. Ringan dan memberi perlindungan dasar.", "lore": "Pilihan umum petualang yang mengutamakan keluwesan.", "min_level": 1, "max_level": 10, "base_stats": {"DEF": 5}, "growth_per_level": {"DEF": 1}, "icon": "Grade_1/Leather_Armor.png"}, "wooden_shield": {"id": "wooden_shield", "name": "Wooden Shield", "grade": 1, "category": "Armor", "subtype": "Shield", "description": "Perisai kayu bundar dengan lapisan logam sederhana di bagian tengah.", "lore": "Perisai sederhana yang mudah diperbaiki oleh pengrajin desa.", "min_level": 1, "max_level": 10, "base_stats": {"DEF": 3, "HP": 5}, "growth_per_level": {"DEF": 1, "HP": 1}, "icon": "Grade_1/Wooden_Shield.png"}, "iron_armor": {"id": "iron_armor", "name": "Iron Armor", "grade": 2, "category": "Armor", "subtype": "Body Armor", "description": "Baju zirah besi yang menutupi bagian penting tubuh dan memberi perlindungan kuat.", "lore": "Umum digunakan penjaga dan petualang yang sering berhadapan langsung dengan musuh.", "min_level": 1, "max_level": 20, "base_stats": {"DEF": 12, "MDEF": 4}, "growth_per_level": {"DEF": 2, "MDEF": 1}, "icon": "Grade_2/Iron_Armor.png"}, "reinforced_shield": {"id": "reinforced_shield", "name": "Reinforced Shield", "grade": 2, "category": "Armor", "subtype": "Shield", "description": "Perisai kokoh dengan rangka logam dan permukaan kayu yang diperkuat.", "lore": "Dipilih petualang yang mengutamakan keselamatan saat menjelajah.", "min_level": 1, "max_level": 20, "base_stats": {"DEF": 8, "HP": 15, "MDEF": 3}, "growth_per_level": {"DEF": 1, "HP": 2, "MDEF": 0.5}, "icon": "Grade_2/Reinforced_Shield.png"}, "copper_ring": {"id": "copper_ring", "name": "Copper Ring", "grade": 1, "category": "Accessory", "subtype": "Ring", "description": "Cincin tembaga polos dengan bentuk sederhana, cukup kuat untuk digunakan sehari-hari.", "lore": "Cincin seperti ini kerap menjadi pembelian pertama seorang petualang.", "min_level": 1, "max_level": 10, "base_stats": {"HP": 10}, "growth_per_level": {"HP": 2}, "icon": "Grade_1/Copper_Ring.png"}, "simple_pendant": {"id": "simple_pendant", "name": "Simple Pendant", "grade": 1, "category": "Accessory", "subtype": "Pendant", "description": "Liontin sederhana dengan batu biru kecil yang menyimpan sedikit energi.", "lore": "Batu biru ini sering dianggap simbol awal perjalanan seorang pengelana.", "min_level": 1, "max_level": 10, "base_stats": {"MP": 10, "MDEF": 1, "SPD": 1}, "growth_per_level": {"MP": 2, "MDEF": 0.2, "SPD": 0.1}, "icon": "Grade_1/Simple_Pendant.png"}, "silver_ring": {"id": "silver_ring", "name": "Silver Ring", "grade": 2, "category": "Accessory", "subtype": "Ring", "description": "Cincin perak dengan permata biru yang dipercaya membantu penggunanya menemukan celah lawan.", "lore": "Perhiasan yang kerap menjadi hadiah bagi petualang setelah tugas sulit.", "min_level": 1, "max_level": 20, "base_stats": {"HP": 25, "CRT_DMG": 5}, "growth_per_level": {"HP": 3, "CRT_DMG": 0.5}, "icon": "Grade_2/Silver_Ring.png"}, "mana_pendant": {"id": "mana_pendant", "name": "Mana Pendant", "grade": 2, "category": "Accessory", "subtype": "Pendant", "description": "Liontin dengan kristal biru yang mampu menyimpan energi sihir lebih banyak.", "lore": "Kristalnya diproses agar dapat menampung energi lebih besar daripada batu biasa.", "min_level": 1, "max_level": 20, "base_stats": {"MP": 25, "MDEF": 3, "SPD": 2}, "growth_per_level": {"MP": 3, "MDEF": 0.5, "SPD": 0.2}, "icon": "Grade_2/Mana_Pendant.png"}};

@@ -1,0 +1,587 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><link rel="stylesheet" href="base.css"></head><body>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>UI Game RPG - Lobby</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,700;0,800;0,900;1,800;1,900&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- =====================================================================
+     DEFINISI IKON SVG (gradient + simbol, dipakai lewat <use>)
+     ===================================================================== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+
+  </defs>
+
+  <!-- Char: ikon kartu ID 3D -->
+  <symbol id="i-char" viewBox="0 0 300 386">
+    <image href="i-char.webp" width="300" height="386"/>
+  </symbol>
+
+  <!-- Inventory: ransel -->
+  <symbol id="i-bag" viewBox="0 0 300 282">
+    <image href="i-bag.webp" width="300" height="282"/>
+  </symbol>
+
+  <!-- Challenge: perisai + pedang bersilang -->
+  <symbol id="i-challenge" viewBox="0 0 300 305">
+    <image href="i-challenge.webp" width="300" height="305"/>
+  </symbol>
+
+  <!-- Formation (dulu Achievement): piala -->
+  <symbol id="i-trophy" viewBox="0 0 397 451"><image href="i-trophy.webp" width="397" height="451"/></symbol>
+
+  <!-- Shop: toko -->
+  <symbol id="i-shop" viewBox="0 0 300 287">
+    <image href="i-shop.webp" width="300" height="287"/>
+  </symbol>
+
+  <!-- Task: papan checklist -->
+  <symbol id="i-task" viewBox="0 0 300 340">
+    <image href="i-task.webp" width="300" height="340"/>
+  </symbol>
+
+  <!-- Daily Reward: kotak hadiah -->
+
+  <!-- Energi -->
+  <symbol id="i-bolt" viewBox="0 0 203 300">
+    <image href="i-bolt.webp" width="203" height="300"/>
+  </symbol>
+
+  <!-- Kredit -->
+  <symbol id="i-credit" viewBox="0 0 300 245">
+    <image href="i-credit.webp" width="300" height="245"/>
+  </symbol>
+
+  <!-- Diamond -->
+  <symbol id="i-equip" viewBox="0 0 48 48"><defs><linearGradient id="eqBl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#9ec3ee"/></linearGradient><linearGradient id="eqHd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb7ff"/><stop offset="1" stop-color="#2f78dc"/></linearGradient></defs><path d="M40 4h5v5L27 27l-5-5z" fill="url(#eqBl)" stroke="#33557f" stroke-width="2.2" stroke-linejoin="round"/><path d="M16 22l10 10-4 4-10-10z" fill="url(#eqHd)" stroke="#33557f" stroke-width="2.2" stroke-linejoin="round"/><path d="M17 31l-8 8M6 37l5 5M4 44l4-4" fill="none" stroke="#33557f" stroke-width="3.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-gem" viewBox="0 0 221 260">
+    <image href="i-gem.webp" width="221" height="260"/>
+  </symbol>
+
+  <!-- Plus -->
+  <symbol id="i-plus" viewBox="0 0 32 32">
+    <path d="M16 2 V30 M2 16 H30" stroke="#3dc0ec" stroke-width="2.6" stroke-linecap="butt" fill="none"/>
+  </symbol>
+
+  <!-- Pengaturan: gerigi -->
+  <symbol id="i-mail" viewBox="0 0 64 48">
+    <clipPath id="mailClip"><rect x="2" y="1.5" width="60" height="45" rx="4.5"/></clipPath>
+    <rect x="2" y="1.5" width="60" height="45" rx="4.5" fill="#456397"/>
+    <path d="M-2 6.35 L32.45 28 L66 7" fill="none" stroke="#d9e7ff" stroke-width="3.9" stroke-linejoin="round" clip-path="url(#mailClip)"/>
+  </symbol>
+  <symbol id="i-grid" viewBox="0 0 48 48">
+    <g fill="#456397">
+      <rect x="16" y="2" width="12" height="12" rx="1.5"/><rect x="32" y="2" width="12" height="12" rx="1.5"/>
+      <rect x="0" y="18" width="12" height="12" rx="1.5"/><rect x="16" y="18" width="12" height="12" rx="1.5"/><rect x="32" y="18" width="12" height="12" rx="1.5"/>
+      <rect x="0" y="34" width="12" height="12" rx="1.5"/><rect x="16" y="34" width="12" height="12" rx="1.5"/><rect x="32" y="34" width="12" height="12" rx="1.5"/>
+    </g>
+  </symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5 L19 19 M19 5 L5 19" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" fill="none"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#456397"/><path d="M18.6 12 H5.6 M10.3 7.2 L5.6 12 L10.3 16.8" stroke="#fff" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></symbol>
+
+  <!-- Tab menu: tiga garis -->
+
+  <!-- Api streak (besar) -->
+
+  <!-- Ikon Tab Menu popup (gaya referensi) -->
+  <defs>
+  </defs>
+  <symbol id="i-home" viewBox="38.6 14.9 56 56"><path d="M44.7 42.58 L65.95 22.27 L88.46 43.39" fill="none" stroke="#456397" stroke-width="6.79" stroke-linecap="round" stroke-linejoin="round"/><path d="M66.17 30.05 L50.86 44.6 V65.1 A1.77 1.77 0 0 0 52.63 66.87 H60.39 V54.45 A3.74 3.74 0 0 1 64.13 50.71 H68.18 A3.74 3.74 0 0 1 71.92 54.45 V66.87 H79.54 A1.77 1.77 0 0 0 81.31 65.1 V44.43 Z" fill="#456397"/></symbol>
+  <symbol id="i-tm-opt" viewBox="0 0 300 291"><image href="i-tm-opt.webp" width="300" height="291"/></symbol>
+  <symbol id="i-tm-acc" viewBox="0 0 300 340"><image href="i-tm-acc.webp" width="300" height="340"/></symbol>
+  <symbol id="i-tm-setup" viewBox="0 0 251 300"><image href="i-tm-setup.webp" width="251" height="300"/></symbol>
+  <symbol id="i-tm-help" viewBox="0 0 300 272"><image href="i-tm-help.webp" width="300" height="272"/></symbol>
+</svg>
+
+<div id="fit">
+<div id="stage">
+
+  <!-- ===== LAYER 1: BACKGROUND (dikosongkan dulu, isi nanti) =====
+       Contoh: document.getElementById('bg-layer').style.backgroundImage = "url('bg.jpg')"; -->
+  <div class="layer" id="bg-layer"></div>
+
+  <!-- ===== LAYER 2: KARAKTER (dikosongkan dulu, isi nanti) =====
+       Contoh: <img src="char.png" style="position:absolute;left:340px;bottom:0;height:560px"> -->
+
+  <!-- ===== 1. PROFIL (kiri atas) ===== -->
+  <div class="profile a-top" style="--d:.05s">
+    <svg class="profile-bg" viewBox="0 0 364 83" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="pfBase" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1b4f8e"/><stop offset=".3" stop-color="#16427a"/><stop offset=".55" stop-color="#133a67"/><stop offset="1" stop-color="#133960"/></linearGradient>
+        <clipPath id="pfClip"><path id="pfShape" d="M8,0 H356 Q364,0 363,8 L349,75 Q347.5,83 340,83 H8 Q0,83 0,75 V8 Q0,0 8,0 Z"/></clipPath>
+      </defs>
+      <path d="M8,0 H356 Q364,0 363,8 L349,75 Q347.5,83 340,83 H8 Q0,83 0,75 V8 Q0,0 8,0 Z" fill="url(#pfBase)"/>
+      <g clip-path="url(#pfClip)">
+        <polygon points="0,0 135,0 75,83 0,83" fill="#2a68b4" opacity=".5"/>
+        <polygon points="70,0 135,0 98,48" fill="#4c8bd6" opacity=".16"/>
+        <polygon points="0,40 62,83 0,83" fill="#0f3566" opacity=".35"/>
+        <polygon points="0,0 62,0 20,50" fill="#fff" opacity=".05"/>
+      </g>
+    </svg>
+    <div class="lv"><small>Lv.</small><b id="pLv">90</b></div>
+    <div class="pname" id="pName">Cyan</div>
+    <div class="exp"><i id="pExp"></i></div>
+    <div class="exp-text" id="pExpTxt">MAX</div>
+  </div>
+
+  <!-- ===== 2. ENERGI, KREDIT, DIAMOND ===== -->
+  <div class="topbar a-top" style="--d:.15s">
+    <div class="pill energy">
+      <svg class="ic"><use href="#i-bolt"/></svg>
+      <span class="val" id="vEnergy">19/240</span>
+      <button class="plus" aria-label="Tambah energi"><svg><use href="#i-plus"/></svg></button>
+    </div>
+    <div class="pill credit">
+      <svg class="ic"><use href="#i-credit"/></svg>
+      <span class="val" id="vCredit">18,005,747</span>
+    </div>
+    <div class="pill diamond">
+      <svg class="ic"><use href="#i-gem"/></svg>
+      <span class="val" id="vDiamond">30,566</span>
+      <button class="plus" aria-label="Tambah diamond"><svg><use href="#i-plus"/></svg></button>
+    </div>
+  </div>
+
+  <!-- ===== 3. PENGATURAN + TAB MENU (kanan atas) ===== -->
+  <div class="sys a-top" style="--d:.25s">
+    <button class="sysbtn" id="bMail" aria-label="Surat"><svg><use href="#i-mail"/></svg></button>
+    <span class="sep"></span>
+    <button class="sysbtn" id="bMenu" aria-label="Tab menu"><svg><use href="#i-grid"/></svg></button>
+  </div>
+
+  <!-- ===== EVENT (kanan atas) ===== -->
+  <button class="evbtn a-right" id="bEvent" style="--d:.45s" aria-label="Event">
+    <span class="iconw">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="evG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe3fa"/></linearGradient>
+          <linearGradient id="evG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb7ff"/><stop offset="1" stop-color="#2f78dc"/></linearGradient>
+          <linearGradient id="evG3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a0"/><stop offset="1" stop-color="#ffc83a"/></linearGradient>
+        </defs>
+        <rect x="9" y="12" width="46" height="44" rx="8" fill="url(#evG1)" stroke="#8fb4de" stroke-width="2"/>
+        <path d="M9 20a8 8 0 0 1 8-8h30a8 8 0 0 1 8 8v8H9z" fill="url(#evG2)"/>
+        <rect x="19" y="6" width="5" height="12" rx="2.5" fill="#6b8fb5"/><rect x="40" y="6" width="5" height="12" rx="2.5" fill="#6b8fb5"/>
+        <path d="M32 31l3.4 7 7.6 1.1-5.5 5.4 1.3 7.5L32 48.3 25.2 52l1.3-7.5L21 39.1l7.6-1.1z" fill="url(#evG3)" stroke="#d9a21c" stroke-width="1.3" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="lbl out-white">Event</span>
+    <span class="evdots"><i></i><i></i><i></i></span>
+  </button>
+
+  <button class="evbtn a-right" id="bRecruit" style="--d:.5s" aria-label="Recruit">
+    <span class="iconw"><svg><use href="#i-challenge"/></svg></span>
+    <span class="lbl out-white">Recruit<span class="nd"><i class="rdot" id="chalRed" hidden></i><i class="rdot amber" id="chalYel" hidden></i></span></span>
+  </button>
+
+  <!-- ===== BANNER KOSONG (kiri bawah) ===== -->
+  <button class="banner a-left" id="bBanner" style="--d:.5s" aria-label="Banner"></button>
+  <button class="banner r a-right" id="bBannerR" style="--d:.5s" aria-label="Banner"></button>
+
+  <!-- ===== 4. TASK + DAILY REWARD + SHOP (kiri) ===== -->
+  <button class="side notice a-left" id="bNotice" style="--d:.25s" aria-label="Notice">
+    <span class="iconw">
+      <svg class="big" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="noG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe3fa"/></linearGradient>
+          <linearGradient id="noG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6fb7ff"/><stop offset="1" stop-color="#2f78dc"/></linearGradient>
+          <linearGradient id="noG3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff0a0"/><stop offset="1" stop-color="#ffc83a"/></linearGradient>
+        </defs>
+        <path d="M32 6a3.5 3.5 0 0 1 3.5 3.5v1.6C43.6 12.7 49 19 49 27.5V36l5 8v3H10v-3l5-8v-8.5c0-8.5 5.4-14.8 13.5-16.4V9.5A3.5 3.5 0 0 1 32 6z" fill="url(#noG1)" stroke="#8fb4de" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M15 36l-5 8v3h44v-3l-5-8z" fill="url(#noG2)"/>
+        <path d="M25 51h14a7 7 0 0 1-14 0z" fill="url(#noG3)" stroke="#d9a21c" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <span class="lbl out-white">Notice</span>
+  </button>
+  <button class="side social a-left" id="bSocial" style="--d:.35s" aria-label="Social">
+    <span class="iconw">
+      <svg class="big" viewBox="0 0 64 64" aria-hidden="true">
+          <defs>
+            <linearGradient id="soG1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd0ff"/><stop offset="1" stop-color="#3a86e6"/></linearGradient>
+            <linearGradient id="soG2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cfe3fa"/></linearGradient>
+          </defs>
+          <path d="M10 14h30a6 6 0 0 1 6 6v16a6 6 0 0 1-6 6H26l-10 8v-8h-6a6 6 0 0 1-6-6V20a6 6 0 0 1 6-6z" transform="translate(2 -2)" fill="url(#soG1)" stroke="#2f6fc4" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="19" cy="29" r="2.6" fill="#fff"/><circle cx="28" cy="29" r="2.6" fill="#fff"/><circle cx="37" cy="29" r="2.6" fill="#fff"/>
+          <path d="M34 36h18a6 6 0 0 1 6 6v10a6 6 0 0 1-6 6h-3v6l-8-6h-7a6 6 0 0 1-6-6V42a6 6 0 0 1 6-6z" transform="translate(-2 -6)" fill="url(#soG2)" stroke="#8fb4de" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+    </span>
+    <span class="lbl out-white">Social</span>
+  </button>
+  <button class="side task a-left" id="bTask" style="--d:.3s" aria-label="Task">
+    <span class="iconw">
+      <svg class="big"><use href="#i-task"/></svg>
+      <span class="badge" id="tBadge">3/5</span>
+    </span>
+    <span class="lbl out-white">Task</span>
+  </button>
+  <button class="side daily a-left" style="--d:.4s" aria-label="Daily Reward">
+    <span class="iconw">
+      <img class="big" alt="" draggable="false" src="ikon-besar.webp">
+    </span>
+    <span class="lbl out-white">Daily Reward<i class="rdot"></i></span>
+  </button>
+  <button class="side shop a-left" id="bShop" style="--d:.4s" aria-label="Shop">
+    <span class="iconw">
+      <svg class="big"><use href="#i-shop"/></svg>
+    </span>
+  </button>
+
+  <!-- ===== 7. TOMBOL PLAY ===== -->
+  <button class="play a-right" style="--d:.55s" aria-label="Play">
+    <img class="play-img" alt="" draggable="false" src="tombol-play.webp">
+  </button>
+
+  <!-- ===== 8. DOCK BAWAH: 5 TOMBOL ===== -->
+  <nav class="dock a-bottom" style="--d:.2s" aria-label="Menu utama">
+    <div class="dock-row">
+      <button class="nav" aria-label="Inventory">
+        <span class="orb"><svg><use href="#i-bag"/></svg></span>
+        <span class="name">Inventory</span>
+      </button>
+      <button class="nav" id="bCraft" aria-label="Craft">
+        <span class="orb"><img class="tall" alt="" draggable="false" src="orb-tall.webp"></span>
+        <span class="name">Craft</span>
+      </button>
+      <button class="nav" id="bEquip" aria-label="Equipment">
+        <span class="orb"><svg><use href="#i-equip"/></svg></span>
+        <span class="name">Equipment</span>
+      </button>
+      <button class="nav" id="bSkill" aria-label="Skill">
+        <span class="orb"><img alt="" draggable="false" src="orb-skill.webp"></span>
+        <span class="name">Skill</span>
+      </button>
+      <button class="nav" aria-label="Char">
+        <span class="orb"><svg><use href="#i-char"/></svg></span>
+        <span class="name">Char</span>
+      </button>
+      <button class="nav" aria-label="Formation">
+        <span class="orb"><svg><use href="#i-trophy"/></svg></span>
+        <span class="name">Formation</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== CHAR (formasi + daftar karakter) ===== -->
+  <section id="cp" aria-label="Formation">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+      <linearGradient id="cpTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#d4e8fa"/></linearGradient>
+      <linearGradient id="cpSide" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b9d4ee"/><stop offset="1" stop-color="#8fb3d9"/></linearGradient>
+      <radialGradient id="cpIn" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#f4faff"/><stop offset="1" stop-color="#c3def6"/></radialGradient>
+      <filter id="cpBlur" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="6"/></filter>
+      <filter id="cpBlur2" x="-20%" y="-60%" width="140%" height="220%"><feGaussianBlur stdDeviation="3.5"/></filter>
+    </defs></svg>
+    <div class="sbar">
+      <button class="sback" id="cBack" aria-label="Kembali"><svg><use href="#i-back"/></svg></button>
+      <span class="stitle">Formation</span>
+      <span class="sres e" style="left:448px"><svg><use href="#i-bolt"/></svg><span id="cEnergy">19/240</span></span>
+      <button class="sp" style="left:567px" aria-label="Tambah energi" data-soon="Isi energi"><svg><use href="#i-plus"/></svg></button>
+      <i class="sl" style="left:610px"></i>
+      <span class="sres c" style="left:620px"><svg><use href="#i-credit"/></svg><span id="cCredit">0</span></span>
+      <i class="sl" style="left:808px"></i>
+      <span class="sres d" style="left:820px"><svg><use href="#i-gem"/></svg><span id="cDiamond">0</span></span>
+      <button class="sp" style="left:984px" aria-label="Tambah diamond" data-soon="Isi diamond"><svg><use href="#i-plus"/></svg></button>
+      <i class="sl" style="left:1028px"></i>
+      <button class="si" id="cGear" style="left:1049px" aria-label="Menu"><svg><use href="#i-grid"/></svg></button>
+      <i class="sl" style="left:1096px"></i>
+      <button class="si" id="cHome" style="left:1114px" aria-label="Lobi"><svg><use href="#i-home"/></svg></button>
+    </div>
+    <div class="cpf" id="cpF">
+      <button class="cpfb" data-f="0"><i>1</i>Formasi 1</button>
+      <button class="cpfb" data-f="1"><i>2</i>Formasi 2</button>
+      <button class="cpfb" data-f="2"><i>3</i>Formasi 3</button>
+      <button class="cpfb" data-f="3"><i>4</i>Formasi 4</button>
+    </div>
+    <div class="cpov" id="cpOv"></div>
+    <aside class="cppop" id="cpPop" aria-label="Panel">
+      <div class="cpph"><span id="cpPopT"></span><button class="cppx" id="cpPopX" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+      <div class="cppb" id="cpPopB"></div>
+    </aside>
+    <div class="cpside">
+      <button class="nav cpnav" id="cpChar" aria-label="Char">
+        <span class="orb"><svg><use href="#i-char"/></svg></span>
+        <span class="name">Char</span>
+      </button>
+      <button class="nav cpnav" id="cpSkill" aria-label="Skill">
+        <span class="orb"></span>
+        <span class="name">Skill</span>
+      </button>
+    </div>
+    <div class="cpstage">
+      <button class="cps" data-i="0" style="left:267px;top:336px;width:146px;height:62px;z-index:1;--s:0.56;--d:0.05s" aria-label="Slot 1">
+        <svg viewBox="0 0 260 110" aria-hidden="true">
+          <ellipse cx="130" cy="84" rx="120" ry="20" fill="rgba(70,120,175,.28)" filter="url(#cpBlur)"/>
+          <ellipse class="cpglow" cx="130" cy="64" rx="126" ry="36" fill="none" stroke="#7cc6ff" stroke-width="5" opacity=".75" filter="url(#cpBlur2)"/>
+          <path d="M10 48v15a120 34 0 0 0 240 0V48z" fill="url(#cpSide)"/>
+          <path d="M10 63a120 34 0 0 0 240 0" fill="none" stroke="#8fc3ec" stroke-width="2" opacity=".85"/>
+          <ellipse cx="130" cy="48" rx="120" ry="34" fill="url(#cpTop)" stroke="#ffffff" stroke-width="2"/>
+          <ellipse cx="130" cy="48" rx="96" ry="26.5" fill="none" stroke="#a9d3f5" stroke-width="2.5" opacity=".9"/>
+          <ellipse cx="130" cy="48" rx="72" ry="19.5" fill="url(#cpIn)" stroke="#ffffff" stroke-width="1.5" opacity=".95"/>
+          <ellipse cx="130" cy="43" rx="100" ry="22" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-dasharray="60 400" stroke-dashoffset="-10" stroke-linecap="round" opacity=".9"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="126" ry="37" fill="none" stroke="#ffcf3a" stroke-width="4" filter="url(#cpBlur2)"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="124" ry="36" fill="none" stroke="#ffe27a" stroke-width="2"/>
+        </svg>
+        <span class="cpn">1</span>
+      </button>
+      <button class="cps" data-i="3" style="left:867px;top:336px;width:146px;height:62px;z-index:1;--s:0.56;--d:0.15s" aria-label="Slot 4">
+        <svg viewBox="0 0 260 110" aria-hidden="true">
+          <ellipse cx="130" cy="84" rx="120" ry="20" fill="rgba(70,120,175,.28)" filter="url(#cpBlur)"/>
+          <ellipse class="cpglow" cx="130" cy="64" rx="126" ry="36" fill="none" stroke="#7cc6ff" stroke-width="5" opacity=".75" filter="url(#cpBlur2)"/>
+          <path d="M10 48v15a120 34 0 0 0 240 0V48z" fill="url(#cpSide)"/>
+          <path d="M10 63a120 34 0 0 0 240 0" fill="none" stroke="#8fc3ec" stroke-width="2" opacity=".85"/>
+          <ellipse cx="130" cy="48" rx="120" ry="34" fill="url(#cpTop)" stroke="#ffffff" stroke-width="2"/>
+          <ellipse cx="130" cy="48" rx="96" ry="26.5" fill="none" stroke="#a9d3f5" stroke-width="2.5" opacity=".9"/>
+          <ellipse cx="130" cy="48" rx="72" ry="19.5" fill="url(#cpIn)" stroke="#ffffff" stroke-width="1.5" opacity=".95"/>
+          <ellipse cx="130" cy="43" rx="100" ry="22" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-dasharray="60 400" stroke-dashoffset="-10" stroke-linecap="round" opacity=".9"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="126" ry="37" fill="none" stroke="#ffcf3a" stroke-width="4" filter="url(#cpBlur2)"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="124" ry="36" fill="none" stroke="#ffe27a" stroke-width="2"/>
+        </svg>
+        <span class="cpn">4</span>
+      </button>
+      <button class="cps" data-i="1" style="left:397px;top:392px;width:203px;height:86px;z-index:2;--s:0.78;--d:0.25s" aria-label="Slot 2">
+        <svg viewBox="0 0 260 110" aria-hidden="true">
+          <ellipse cx="130" cy="84" rx="120" ry="20" fill="rgba(70,120,175,.28)" filter="url(#cpBlur)"/>
+          <ellipse class="cpglow" cx="130" cy="64" rx="126" ry="36" fill="none" stroke="#7cc6ff" stroke-width="5" opacity=".75" filter="url(#cpBlur2)"/>
+          <path d="M10 48v15a120 34 0 0 0 240 0V48z" fill="url(#cpSide)"/>
+          <path d="M10 63a120 34 0 0 0 240 0" fill="none" stroke="#8fc3ec" stroke-width="2" opacity=".85"/>
+          <ellipse cx="130" cy="48" rx="120" ry="34" fill="url(#cpTop)" stroke="#ffffff" stroke-width="2"/>
+          <ellipse cx="130" cy="48" rx="96" ry="26.5" fill="none" stroke="#a9d3f5" stroke-width="2.5" opacity=".9"/>
+          <ellipse cx="130" cy="48" rx="72" ry="19.5" fill="url(#cpIn)" stroke="#ffffff" stroke-width="1.5" opacity=".95"/>
+          <ellipse cx="130" cy="43" rx="100" ry="22" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-dasharray="60 400" stroke-dashoffset="-10" stroke-linecap="round" opacity=".9"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="126" ry="37" fill="none" stroke="#ffcf3a" stroke-width="4" filter="url(#cpBlur2)"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="124" ry="36" fill="none" stroke="#ffe27a" stroke-width="2"/>
+        </svg>
+        <span class="cpn">2</span>
+      </button>
+      <button class="cps" data-i="2" style="left:680px;top:392px;width:203px;height:86px;z-index:2;--s:0.78;--d:0.35s" aria-label="Slot 3">
+        <svg viewBox="0 0 260 110" aria-hidden="true">
+          <ellipse cx="130" cy="84" rx="120" ry="20" fill="rgba(70,120,175,.28)" filter="url(#cpBlur)"/>
+          <ellipse class="cpglow" cx="130" cy="64" rx="126" ry="36" fill="none" stroke="#7cc6ff" stroke-width="5" opacity=".75" filter="url(#cpBlur2)"/>
+          <path d="M10 48v15a120 34 0 0 0 240 0V48z" fill="url(#cpSide)"/>
+          <path d="M10 63a120 34 0 0 0 240 0" fill="none" stroke="#8fc3ec" stroke-width="2" opacity=".85"/>
+          <ellipse cx="130" cy="48" rx="120" ry="34" fill="url(#cpTop)" stroke="#ffffff" stroke-width="2"/>
+          <ellipse cx="130" cy="48" rx="96" ry="26.5" fill="none" stroke="#a9d3f5" stroke-width="2.5" opacity=".9"/>
+          <ellipse cx="130" cy="48" rx="72" ry="19.5" fill="url(#cpIn)" stroke="#ffffff" stroke-width="1.5" opacity=".95"/>
+          <ellipse cx="130" cy="43" rx="100" ry="22" fill="none" stroke="rgba(255,255,255,.9)" stroke-width="2" stroke-dasharray="60 400" stroke-dashoffset="-10" stroke-linecap="round" opacity=".9"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="126" ry="37" fill="none" stroke="#ffcf3a" stroke-width="4" filter="url(#cpBlur2)"/>
+          <ellipse class="cpsel" cx="130" cy="48" rx="124" ry="36" fill="none" stroke="#ffe27a" stroke-width="2"/>
+        </svg>
+        <span class="cpn">3</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SHOP ===== -->
+  <section id="shop" aria-label="Shop">
+    <div class="layer" id="shop-bg"></div>
+    <div class="stabs">
+      <button class="stab sel" id="stCredit"><svg><use href="#i-credit"/></svg>Kredit</button>
+      <button class="stab" id="stDiamond"><svg><use href="#i-gem"/></svg>Diamond</button>
+    </div>
+    <div class="sframe"><div class="sgrid" id="sGrid"></div></div>
+    <div class="sbar">
+      <button class="sback" id="sBack" aria-label="Kembali"><svg><use href="#i-back"/></svg></button>
+      <span class="stitle">Shop<i>?</i></span>
+      <span class="sres e" style="left:448px"><svg><use href="#i-bolt"/></svg><span id="sEnergy">19/240</span></span>
+      <button class="sp" style="left:567px" aria-label="Tambah energi" data-soon="Isi energi"><svg><use href="#i-plus"/></svg></button>
+      <i class="sl" style="left:610px"></i>
+      <span class="sres c" style="left:620px"><svg><use href="#i-credit"/></svg><span id="sCredit">0</span></span>
+      <i class="sl" style="left:808px"></i>
+      <span class="sres d" style="left:820px"><svg><use href="#i-gem"/></svg><span id="sDiamond">0</span></span>
+      <button class="sp" style="left:984px" aria-label="Tambah diamond" data-soon="Isi diamond"><svg><use href="#i-plus"/></svg></button>
+      <i class="sl" style="left:1028px"></i>
+      <button class="si" id="sGear" style="left:1049px" aria-label="Menu"><svg><use href="#i-grid"/></svg></button>
+      <i class="sl" style="left:1096px"></i>
+      <button class="si" id="sHome" style="left:1114px" aria-label="Lobi"><svg><use href="#i-home"/></svg></button>
+    </div>
+  </section>
+
+  <!-- ===== POPUP / HALAMAN (di atas semua) ===== -->
+  <div id="ov">
+    <div class="scrim" id="scrim"></div>
+
+    <section class="page" id="pMail" aria-label="Surat">
+      <header class="phead">
+        <button class="pback" data-close aria-label="Kembali"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg></button>
+        <span class="ptitle">Surat</span>
+        <span class="pcount" id="mCount"></span>
+        <button class="pdel" id="mDel">Hapus yang sudah dibaca</button>
+      </header>
+      <div class="pbody" id="mBody"></div>
+    </section>
+
+    <aside class="pmode" id="dMode" role="dialog" aria-label="Pilih mode">
+      <button class="pmx" id="mClose" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <div class="pmgrid">
+        <button class="pmc story" data-mode="Story"><span>Story</span></button>
+        <button class="pmc" data-mode="Missions"><span>Missions</span></button>
+        <button class="pmc sm" data-mode="Boss Challenge"><span>Boss Challenge</span></button>
+        <button class="pmc sm" data-mode="Tactical"><span>Tactical</span></button>
+        <button class="pmc sm" data-mode="Endless"><span>Endless</span></button>
+        <button class="pmc" data-mode="Floor"><span>Floor</span></button>
+        <button class="pmc sm" data-mode="Practice"><span>Practice</span></button>
+      </div>
+    </aside>
+
+    <aside class="tmenu" id="dMenu" role="dialog" aria-label="Menu Tab">
+      <header class="tmhead">
+        <button class="xbtn bk" id="dBack" aria-label="Kembali" hidden><svg><use href="#i-back"/></svg></button>
+        <span class="tmtitle" id="dTitle">Menu Tab</span>
+        <button class="xbtn" data-close aria-label="Tutup"><svg><use href="#i-x"/></svg></button>
+      </header>
+      <div class="tmbody">
+        <div class="tmview on" id="vMenu">
+          <button class="tmbtn" id="rSet"><svg class="ti"><use href="#i-tm-opt"/></svg>Pengaturan</button>
+          <button class="tmbtn" data-soon="Akun"><svg class="ti"><use href="#i-tm-acc"/></svg>Akun</button>
+          <button class="tmbtn" data-soon="Setup"><svg class="ti"><use href="#i-tm-setup"/></svg>Setup</button>
+          <button class="tmbtn" data-soon="Bantuan"><svg class="ti"><use href="#i-tm-help"/></svg>Bantuan</button>
+        </div>
+        <div class="tmview col" id="vSet">
+          <button class="tmbtn row" data-sw="music">Musik<span class="sw on"></span></button>
+          <button class="tmbtn row" data-sw="sfx">Efek Suara<span class="sw on"></span></button>
+          <button class="tmbtn row" data-sw="vib">Getar<span class="sw"></span></button>
+          <button class="tmbtn row" data-sw="notif">Notifikasi<span class="sw on"></span></button>
+          <button class="tmbtn row" id="rReset">Reset Progres</button>
+          <div class="tmver">RPG Lobby v1.0</div>
+        </div>
+      </div>
+    </aside>
+
+    <div id="ndOv" role="dialog" aria-label="Detail karakter Nia">
+<div class="sbar">
+<button class="sback" id="ndBack" aria-label="Kembali"><svg><use href="#i-back"/></svg></button>
+<span class="stitle">Char</span>
+<span class="sres e" style="left:448px"><svg><use href="#i-bolt"/></svg><span id="nEnergy">19/240</span></span>
+<button class="sp" style="left:567px" aria-label="Tambah energi" data-soon="Isi energi"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:610px"></i>
+<span class="sres c" style="left:620px"><svg><use href="#i-credit"/></svg><span id="nCredit">0</span></span>
+<i class="sl" style="left:808px"></i>
+<span class="sres d" style="left:820px"><svg><use href="#i-gem"/></svg><span id="nDiamond">0</span></span>
+<button class="sp" style="left:984px" aria-label="Tambah diamond" data-soon="Isi diamond"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:1028px"></i>
+<button class="si" id="ndGear" style="left:1049px" aria-label="Menu"><svg><use href="#i-grid"/></svg></button>
+<i class="sl" style="left:1096px"></i>
+<button class="si" id="ndHome" style="left:1114px" aria-label="Lobi"><svg><use href="#i-home"/></svg></button>
+</div>
+<div class="ndeq"><div class="dm" style="top:130px"><span>+</span></div><div class="dm" style="top:248px"><span>+</span></div><div class="dm" style="top:366px"><span>+</span></div></div>
+<div id="eqcDlg"><div class="ivcard"><h4 id="eqcDT"></h4><p id="eqcDX"></p><div class="ivbtns"><button class="ivb alt" id="eqcNo">Batal</button><button class="ivb" id="eqcYes">Pindahkan</button></div></div></div>
+<div class="skd"><button class="u" data-i="0" style="left:290px;top:154px" aria-label="Ultimate"><span><b>U</b><small>Lv 1</small></span></button><button class="s" data-i="1" style="left:204px;top:264px" aria-label="Skill 1"><span><b>1</b><small>Lv 1</small></span></button><button class="s" data-i="2" style="left:396px;top:264px" aria-label="Skill 2"><span><b>2</b><small>Lv 1</small></span></button><button class="s" data-i="3" style="left:300px;top:350px" aria-label="Pasif"><span><b>P</b><small>Lv 1</small></span></button></div>
+<div class="ndped"></div><svg class="ndfig" viewBox="0 0 100 120"><defs><linearGradient id="ndga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fe0f6"/><stop offset="1" stop-color="#4f9de0"/></linearGradient></defs><path d="M50 6C50 6 14 50 14 78a36 36 0 0 0 72 0C86 50 50 6 50 6z" fill="url(#ndga)"/><path d="M30 76a20 20 0 0 0 14 22" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/></svg>
+<i class="ndvl"></i><button class="ndt on" data-p="0" style="top:64px" aria-label="Status"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="8" r="4.2"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></button><button class="ndt" data-p="2" style="top:136px">Eq</button><button class="ndt" data-p="3" style="top:208px">Skill</button><button class="ndt" data-p="1" style="top:280px">Talent</button>
+<div class="ndwi ndwn">Tidal Heart</div><div class="ndwi ndwy"><span>Unique Weapon &middot; Water</span></div>
+<div class="ndwi ndwp">Relik pusaran air yang berdenyut seperti jantung samudra. Menyatu dengan Nia, ia menguatkan sihir air dan menjaga alirannya tetap tenang di tengah pertempuran.</div>
+<section class="ndp">
+<div class="ndpg on" id="ndP0">
+<div class="ndh"><b>Nia</b><i>&#9670;&#9670;&#9670;&#9670;</i><div class="ndlv"><b id="ndLv">Lv. 1</b><span class="ndg" id="ndLvG"></span><div class="ndxp"><span id="ndXpT">0 / 100</span><div><u id="ndXpG"></u><i id="ndXpB"></i></div></div></div></div>
+<div class="ndtl">Water Magician - &#128167; Water<span class="ndlvl" id="ndCap"></span></div>
+<div class="ndr"><div>&#9876; DPS</div><div>Middle</div></div>
+<div class="ndst" id="ndSt"></div>
+<div class="ndil"><span id="ndItT">Training Report</span><button class="ndrs" id="ndItR">Reset</button></div>
+<div class="ndit" id="ndIt"></div>
+<button class="ndbtn ndup" id="ndLvBtn">Upgrade</button>
+</div>
+<div class="ndpg" id="ndP2"><div class="ndsoon">Equipment<small>Coming soon</small></div></div>
+<div class="ndpg" id="ndP4"><button class="eqcx" id="eqcX" aria-label="Tutup">&times;</button><div class="eqcd" id="eqcDet"></div><button class="ndbtn eqcuse" id="eqcUse">Use</button><div class="ivlist eqcl" id="eqcList"></div></div>
+<div class="ndpg" id="ndP3"><div class="skh"><b id="skName"></b><span class="ndlvl" id="skLv"></span><span class="chip" id="skType"></span></div><div class="skt" id="skDesc"></div><div class="skn"><span>Bahan upgrade</span><span id="skStep"></span></div><div class="skg" id="skG"></div><div class="skc" id="skCoin"></div><button class="ndbtn skb" id="skUp">Upgrade</button><div style="display:none"><div class="ndd"><div class="ndc" style="flex:none">P</div><div><h4>Aqua Mark <span class="ndlvl" id="ndPasLv">Lv 1</span></h4><p>Pasif: Skill memberi +1 Aqua Mark (Ultimate +2) ke tiap musuh yang terkena, maks 5 Mark. Tiap Mark menambah 3% damage Nia ke musuh itu selama 5 detik. Basic Attack tidak memberi Mark.</p></div><button class="ndbtn ndpup" id="ndPasUp">Upgrade</button></div>
+<div class="ndrc"><div id="ndRcl" style="display:flex;flex-direction:column;gap:6px"></div><button class="ndbtn ndsup" id="ndSkUp">Upgrade</button></div>
+</div></div>
+<div class="ndpg" id="ndP1">
+<i class="nd2dv"></i>
+<div class="nd2l" id="ndWl"></div><button class="ndbtn nd2u" id="ndWpUp">Upgrade</button>
+<div class="nd2w" id="ndWst"></div>
+<div id="ndNodes"></div>
+</div>
+</section>
+<div id="upOv"><div class="upc"><h4 id="upT"></h4><div id="upB"></div><div class="upf"><span id="upCoin"></span><span><button class="ivb alt" id="upNo">Batal</button> <button class="ivb" id="upYes">OK</button></span></div></div></div>
+<div id="stOv"><div class="upc"><div class="sotit"><span id="ndTc"></span><b id="ndTn"></b></div><div class="sochip" id="ndTs"></div><p id="ndTd"></p>
+<div class="upf"><span></span><span><button class="ivb alt" id="stNo">Tutup</button> <button class="ivb" id="ndStarBtn" hidden></button></span></div></div></div>
+<div id="wpOv"><div class="upc"><h4>Tidal Heart: Upgrade</h4>
+<div class="ndlv"><b id="ndWLv">Lv. 1</b><span class="ndg" id="ndWLvG"></span><div class="ndxp"><span id="ndWXpT"></span><div><u id="ndWXpG"></u><i id="ndWXpB"></i></div></div></div>
+<div class="ndil"><span id="ndWItT">Talent Prism</span><button class="ndrs" id="ndWItR">Reset</button></div>
+<div class="ndit" id="ndWIt"></div>
+<div class="upf"><span></span><span><button class="ivb alt" id="wpNo">Batal</button> <button class="ivb" id="wpOk">Upgrade</button></span></div></div></div>
+<div id="ndDim"></div>
+<div class="ndsk" id="ndSk"><h4 id="ndSkN"></h4><p id="ndSkT"></p></div>
+</div>
+<div id="ivOv" role="dialog" aria-label="Inventory">
+<div class="sbar">
+<button class="sback" id="ivBack" aria-label="Kembali"><svg><use href="#i-back"/></svg></button>
+<span class="stitle">Inventory</span>
+<span class="sres e" style="left:448px"><svg><use href="#i-bolt"/></svg><span id="iEnergy">19/240</span></span>
+<button class="sp" style="left:567px" aria-label="Tambah energi" data-soon="Isi energi"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:610px"></i>
+<span class="sres c" style="left:620px"><svg><use href="#i-credit"/></svg><span id="iCredit">0</span></span>
+<i class="sl" style="left:808px"></i>
+<span class="sres d" style="left:820px"><svg><use href="#i-gem"/></svg><span id="iDiamond">0</span></span>
+<button class="sp" style="left:984px" aria-label="Tambah diamond" data-soon="Isi diamond"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:1028px"></i>
+<button class="si" id="ivGear" style="left:1049px" aria-label="Menu"><svg><use href="#i-grid"/></svg></button>
+<i class="sl" style="left:1096px"></i>
+<button class="si" id="ivHome" style="left:1114px" aria-label="Lobi"><svg><use href="#i-home"/></svg></button>
+</div>
+<div class="ivst">
+<button class="ivhelp" id="ivHelp" aria-label="Cara mendapatkan item">?</button><button class="ivdel" id="ivDel" aria-label="Jual item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg></button>
+<div class="ivped"></div><div class="ivbig" id="ivBig"></div>
+<button class="ivuse" id="ivUse" hidden>Use</button>
+<div class="ivdesc" id="ivDesc"></div>
+<button class="ivt on" data-t="0" style="top:112px" aria-label="Artifact"></button><button class="ivt" data-t="1" style="top:176px" aria-label="Manual dan Core"></button><button class="ivt" data-t="2" style="top:240px" aria-label="Universal"></button>
+<section class="ivp"><div class="ivh" id="ivH"></div><div class="ivlist" id="ivList"></div></section>
+</div>
+<div id="ivDlg"><div class="ivcard"><h4 id="ivDT"></h4><p id="ivDX"></p><div class="ivbtns"><button class="ivb alt" id="ivDNo">Batal</button><button class="ivb" id="ivDYes">OK</button></div></div></div>
+</div>
+<div id="eqOv" role="dialog" aria-label="Equipment">
+<div class="sbar">
+<button class="sback" id="qBack" aria-label="Kembali"><svg><use href="#i-back"/></svg></button>
+<span class="stitle">Equipment</span>
+<span class="sres e" style="left:448px"><svg><use href="#i-bolt"/></svg><span id="qEnergy">19/240</span></span>
+<button class="sp" style="left:567px" aria-label="Tambah energi" data-soon="Isi energi"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:610px"></i>
+<span class="sres c" style="left:620px"><svg><use href="#i-credit"/></svg><span id="qCredit">0</span></span>
+<i class="sl" style="left:808px"></i>
+<span class="sres d" style="left:820px"><svg><use href="#i-gem"/></svg><span id="qDiamond">0</span></span>
+<button class="sp" style="left:984px" aria-label="Tambah diamond" data-soon="Isi diamond"><svg><use href="#i-plus"/></svg></button>
+<i class="sl" style="left:1028px"></i>
+<button class="si" id="qGear" style="left:1049px" aria-label="Menu"><svg><use href="#i-grid"/></svg></button>
+<i class="sl" style="left:1096px"></i>
+<button class="si" id="qHome" style="left:1114px" aria-label="Lobi"><svg><use href="#i-home"/></svg></button>
+</div>
+<div class="ivst">
+<div class="eqL">
+<div class="eqnm"><span id="eqN"></span><span class="ch" id="eqG"></span></div>
+<div class="eqlv"><span id="eqLv"></span><div class="eqbar"><i id="eqBar"></i></div></div>
+<div class="eqst" id="eqSt"></div>
+<div class="equa">Unique Ability<br>segera hadir</div>
+<div class="eqpv" id="eqPv"></div>
+<div class="eqmt" id="eqMt"></div>
+<button class="equp" id="eqUp">Upgrade</button>
+</div>
+<div class="eqct" id="eqT"></div>
+<div class="ivped eqped"></div><div class="ivbig eqbig" id="eqBig"></div>
+<div class="ivdesc eqd" id="eqD"></div>
+<button class="ivt eqt on" data-c="Weapon" style="top:112px" aria-label="Weapon"></button><button class="ivt eqt" data-c="Armor" style="top:176px" aria-label="Armor"></button><button class="ivt eqt" data-c="Accessory" style="top:240px" aria-label="Accessory"></button>
+<section class="ivp eqp"><div class="ivh" id="eqH"></div><div class="ivlist eqlist" id="eqList"></div></section>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+  </div>
+
+</div>
+</div>
+
+<script src="game.js"></script>
+<!-- ===== TAP FX: efek sentuh futuristik (biru cerah + serpihan geometri) ===== -->
+<div id="ldr" aria-hidden="true"><span>Loading</span></div>
+<canvas id="tapfx" aria-hidden="true" style="position:fixed;left:0;top:0;z-index:99999;pointer-events:none;contain:strict;touch-action:none"></canvas>
+<script src="efek.js"></script>
+<script src="geser.js"></script>
+<script src="layar-penuh.js"></script>
+</body>
+</html>
+
+</body></html>

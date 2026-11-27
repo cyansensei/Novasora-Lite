@@ -1,6 +1,6 @@
 # Novasora Lite
 
-UI lobi game RPG berbasis web (HTML, CSS, JavaScript murni, tanpa framework). Bisa dimainkan di browser HP dan dipasang sebagai aplikasi (PWA).
+UI lobi game RPG berbasis web (HTML, CSS, JavaScript murni, tanpa framework). Bisa dimainkan di browser HP dan dipasang sebagai aplikasi (PWA)..
 
 **Main sekarang:** https://cyansensei.github.io/Novasora-Lite/
 
